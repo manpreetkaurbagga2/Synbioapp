@@ -1,16 +1,13 @@
 from Bio.Seq import Seq
 from Bio import SeqIO
 from Bio import SeqUtils
-from Bio.Blast import NCBIWWW
-from Bio.Blast import NCBIXML
 
 class SequenceAnalyser():
     def __init__(self,seq):
         self.seq=seq
-       
-class Orf(SequenceAnalyser):      
-    def __init__(self,seq):
-        SequenceAnalyser.__init__(self,seq)
+            
+    def orf(self):
+        
         my_sequences=[] 
         for i in range(len(self.seq)): 
             if self.seq.startswith("ATG",i): 
@@ -30,4 +27,6 @@ class Orf(SequenceAnalyser):
 
 for s in SeqIO.parse("id170383510.seq.txt","fasta"): #parsing the sequence file
     sequence=s.seq
-    print(Orf)
+    abc=SequenceAnalyser(sequence)
+    buildingprimer(sequence)
+    print(abc.orf())
