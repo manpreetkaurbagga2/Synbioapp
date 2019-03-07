@@ -60,6 +60,15 @@ def buildingprimer(seq):
                 count=count+1
     print(count)
 
+class Rbs(SequenceAnalyser):    
+    def __init__(self,seq):
+        SequenceAnalyser.__init__(self,seq)
+        self.rbs=Seq("AAGGAGGTG")
+   
+    def RbsPosition(self):
+        rbs_pos=SeqUtils.nt_search(str(self.seq),self.rbs)
+        return "RBS position : {}".format(rbs_pos)
+    
 for s in SeqIO.parse("id170383510.seq.txt","fasta"): #parsing the sequence file
     sequence=s.seq
     abc=SequenceAnalyser(sequence)
