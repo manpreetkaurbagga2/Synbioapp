@@ -68,9 +68,42 @@ class Rbs(SequenceAnalyser):
     def RbsPosition(self):
         rbs_pos=SeqUtils.nt_search(str(self.seq),self.rbs)
         return "RBS position : {}".format(rbs_pos)
+
+class RestrictionSites(SequenceAnalyser):
+    def __init__(self,seq):
+        SequenceAnalyser.__init__(self,seq)
+        self.EcoRI=Seq("GAATTC")
+        self.XbaI=Seq("TCTAGA")
+        self.SpeI=Seq("ACTAGT")
+        self.PstI=Seq("CTGCAG")
+        
+    def Pos_EcoRI(self):
+        EcoRI_pos=SeqUtils.nt_search(str(self.seq),self.EcoRI)
+        return "EcoRI position : {}".format(EcoRI_pos)
     
-for s in SeqIO.parse("id170383510.seq.txt","fasta"): #parsing the sequence file
+    def Pos_XbaI(self):
+        XbaI_pos=SeqUtils.nt_search(str(self.seq),self.XbaI)
+        return "XbaI position : {}".format(XbaI_pos)
+
+    def Pos_SpeI(self):
+        SpeI_pos=SeqUtils.nt_search(str(self.seq),self.SpeI)
+        return "SpeI position : {}".format(SpeI_pos)
+
+    def Pos_PstI(self):
+        PstI_pos=SeqUtils.nt_search(str(self.seq),self.PstI)
+        return "PstI position : {}".format(PstI_pos) 
+    
+for s in SeqIO.parse("id170383510.seq","fasta"): 
     sequence=s.seq
     abc=SequenceAnalyser(sequence)
     buildingprimer(sequence)
     print(abc.orf())
+    
+    a=Rbs(sequence)
+    print (a.RbsPosition())
+    
+    b=RestrictionSites(sequence)
+    print (b.Pos_EcoRI())
+    print (b.Pos_XbaI())
+    print (b.Pos_SpeI())
+    print (b.Pos_PstI())
