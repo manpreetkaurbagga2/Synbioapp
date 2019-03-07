@@ -40,25 +40,33 @@ class Primer(SequenceAnalyser):
     def GCcontent(self):
         return (self.G+self.C)/len(self.seq)*100
 
-def buildingprimer(seq):
-    lengthRange=[18,19,20,21,22,23,24,25]
-    count=0
-    for i in lengthRange:
-        startPos=0
-        endPos=0
-        while endPos<len(seq):
-            endPos=startPos+i
-            pr=seq[startPos:endPos]
-            startPos=endPos
-            p=Primer(pr)
-            if ((p.meltingtemp() >= 55 and p.meltingtemp() <= 65) and
-            (p.GCcontent() >=45 and p.GCcontent() <=55) and
-            (primer3.calcHairpin(str(pr)).structure_found !=True)):
-                print(pr)
-                print ("Melting Temperature : {}".format(p.meltingtemp()))
-                print ("GC content : {}".format(p.GCcontent()))
-                count=count+1
-    print(count)
+def buildPrimer(seq,length):
+    clippedForwardSeq = seq[0:length]
+    clippedReverseSeq = seq[len(seq)-length:len(seq)]
+    forward_Complement = clippedForwardSeq.complement()
+    reverse_Complement =clippedReverseSeq.reverse_complement()
+    Sequences = [forward_Complement,reverse_Complement]
+    OutputString = ['Forward Primer\n ','Reverse Primer\n']
+    for loop in range(2):
+        clippedSeq = Sequences[loop]
+        lengthRange=[18,19,20,21,22,23,24,25]
+        count=0
+        for i in lengthRange:
+            startPos=0
+            endPos=0
+            while endPos<len(clippedSeq):
+                endPos=startPos+i
+                pr=clippedSeq[startPos:endPos]
+                startPos=endPos
+                p=Primer(pr)
+                if ((p.meltingtemp() >= 55 and p.meltingtemp() <= 65) and
+                (p.GCcontent() >=45 and p.GCcontent() <=55) and
+                (primer3.calcHairpin(str(pr)).structure_found !=True)):
+                    print(pr,file=open("output.txt", "a"))
+                    print ("Melting Temperature : {}".format(p.meltingtemp()),file=open("output.txt", "a"))
+                    print ("GC content : {}".format(p.GCcontent()),file=open("output.txt", "a"))
+                    count=count+1
+        print("Total {0} Found :{1}\n".format(OutputString[loop],count),file=open("output.txt", "a"))
 
 class Rbs(SequenceAnalyser):    
     def __init__(self,seq):
