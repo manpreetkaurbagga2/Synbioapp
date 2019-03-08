@@ -15,7 +15,7 @@ All the outputs are published in a common text file (if you want to find everyth
 
 **How to use?**
 
-1.Run the main.py.
+1.Run the main.py file.
 
 2.Follow the Menu and choose an option and ans to sub-options if asked.
 
