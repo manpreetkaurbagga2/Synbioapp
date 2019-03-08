@@ -12,6 +12,13 @@ class TestSequenceAnalyser(unittest.TestCase):
         self.A=assignment2.SequenceAnalyser(self.Sequence)
         self.B=assignment2.Rbs(self.Sequence)
         self.C=assignment2.RestrictionSites(self.Sequence)
+        
+    def testprimer(self):
+        primer=assignment2.buildPrimer(self.Sequence,int(800))
+        forwardPrimers=primer['Forward Primer\n ']
+        primer=forwardPrimers[0]
+        self.assertTrue(primer['MeltingTemperature']>55)
+        self.assertTrue(primer['GCcontent']>45)
     
     def testorf(self):
        orf=self.A.orf()
