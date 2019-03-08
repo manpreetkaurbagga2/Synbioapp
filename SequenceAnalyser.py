@@ -30,7 +30,7 @@ class SequenceAnalyser():
         return super().__getattribute__(ORF_Lenght)
    
 class Primer(SequenceAnalyser):    
-    def __init__(self,seq,A,T,G,C):
+    def __init__(self,seq):
         SequenceAnalyser.__init__(self,seq)
         self.A=seq.count("A")
         self.T=seq.count("T")
