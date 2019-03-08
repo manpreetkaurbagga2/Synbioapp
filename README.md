@@ -6,10 +6,10 @@ Sequence Analyser is a program to find various DNA sequences based upon our requ
 
 **Secondly**, it finds the _position_ of the **RBS** in the sequence given.
 
-**Thirdly**, It gives all possible Forward and Reverse Primers (between length (18-25) based upon 3 parameters: Melting Temperature, GC content and hairpin loop formation. 
+**Thirdly**, It gives all possible **Forward and Reverse Primers** (between length (18-25) based upon 3 parameters: Melting Temperature, GC content and hairpin loop formation. 
 It requires two inputs from the user, a fasta file and the length of the sequence from which he wants to build the Primers.
 
-**Lastly**, it finds the Biobrick compatible Restriction sites, if present in the file.
+**Lastly**, it finds the Biobrick compatible **Restriction sites**, if present in the file.
 
 All the outputs are published in a common text file, if you want to find everything from one fasta file step by step as you give the inputs.
 
