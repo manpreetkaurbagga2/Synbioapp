@@ -149,7 +149,11 @@ while (choice != 'q'):
     elif choice == '4':
         lengthToQuery = input("What lenght you want to query from forward and reverse?")
         print("Primers",file=open("output.txt", "a"))
-        buildPrimer(Sequence,int(lengthToQuery))
+        gp = buildPrimer(Sequence,int(lengthToQuery))
+        for i in gp:
+            print(i,file=open("output.txt","a"))
+            for j in gp[i]:
+                print(j,file=open("output.txt","a"))
         choice = menu()
     else:
         break
