@@ -15,7 +15,7 @@ All the outputs are published in a common text file (if you want to find everyth
 
 **How to use?**
 
-1.Run the program.
+1.Run the main.py.
 
 2.Follow the Menu and choose an option and ans to sub-options if asked.
 
@@ -23,4 +23,4 @@ All the outputs are published in a common text file (if you want to find everyth
 
 **Unit Testing**
 
-It will run 7 Tests. Run the code. Press Enter when the menu is displayed. 
+It will run 7 Tests. Run the code. 
