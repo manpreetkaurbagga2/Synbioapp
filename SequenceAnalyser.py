@@ -30,7 +30,7 @@ class SequenceAnalyser():
         return super().__getattribute__(ORF_Lenght)
    
 class Primer(SequenceAnalyser):    
-    def __init__(self,seq):
+    def __init__(self,seq,A,T,G,C):
         SequenceAnalyser.__init__(self,seq)
         self.A=seq.count("A")
         self.T=seq.count("T")
@@ -44,6 +44,7 @@ class Primer(SequenceAnalyser):
         return (self.G+self.C)/len(self.seq)*100
 
 def buildPrimer(seq,length):
+    generatedPrimers={}
     clippedForwardSeq = seq[0:length]
     clippedReverseSeq = seq[len(seq)-length:len(seq)]
     forward_Complement = clippedForwardSeq.complement()
@@ -51,6 +52,7 @@ def buildPrimer(seq,length):
     Sequences = [forward_Complement,reverse_Complement]
     OutputString = ['Forward Primer\n ','Reverse Primer\n']
     for l in range(2):
+        primers=[]
         clippedSeq = Sequences[l]
         lengthRange=[18,19,20,21,22,23,24,25]
         count=0
@@ -58,6 +60,7 @@ def buildPrimer(seq,length):
             startPos=0
             endPos=0
             while endPos<len(clippedSeq):
+                primerObject={}
                 endPos=startPos+i
                 pr=clippedSeq[startPos:endPos]
                 startPos=endPos
@@ -65,11 +68,13 @@ def buildPrimer(seq,length):
                 if ((p.meltingtemp() >= 55 and p.meltingtemp() <= 65) and
                 (p.GCcontent() >=45 and p.GCcontent() <=55) and
                 (primer3.calcHairpin(str(pr)).structure_found !=True)):
-                    print(pr,file=open("output.txt", "a"))
-                    print ("Melting Temperature : {}".format(p.meltingtemp()),file=open("output.txt", "a"))
-                    print ("GC content : {}".format(p.GCcontent()),file=open("output.txt", "a"))
+                    primerObject['Primer']=str(pr)
+                    primerObject['MeltingTemperature'] = p.meltingtemp()
+                    primerObject['GCcontent']=p.GCcontent()
+                    primers.append(primerObject)
                     count=count+1
-        print("Total {0} Found :{1}\n".format(OutputString[l],count),file=open("output.txt", "a"))
+        generatedPrimers[OutputString[l]]=primers
+    return generatedPrimers 
 
 class Rbs(SequenceAnalyser):    
     def __init__(self,seq):
