@@ -14,9 +14,13 @@ It requires two inputs from the user, a fasta file and the length of the sequenc
 All the outputs are published in a common text file (if you want to find everything from one fasta file step by step) as you give the inputs.
 
 **How to use?**
+
 1.Run the program.
+
 2.Follow the Menu and choose an option and ans to sub-options if asked.
+
 3.An output.txt file is created for the output you have asked for.
 
 **Unit Testing**
+
 It will run 7 Tests. Run the code. Press Enter when the menu is displayed. 
